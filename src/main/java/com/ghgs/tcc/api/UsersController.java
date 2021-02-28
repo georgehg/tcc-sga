@@ -1,25 +1,36 @@
 package com.ghgs.tcc.api;
 
 import com.ghgs.tcc.service.UserInfoDto;
+import com.ghgs.tcc.service.UserPermissionsDto;
+import com.ghgs.tcc.service.UsersService;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.Map;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:3000")
 @RequestMapping("/users")
 public class UsersController {
 
+    private UsersService usersService;
+
+    public UsersController(UsersService usersService) {
+        this.usersService = usersService;
+    }
+
     @PostMapping(
             path = "/authenticate",
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<UserInfoDto> authenticate(@RequestBody Map<String, String> credentials) {
-        return ResponseEntity.ok(
-                UserInfoDto.of(credentials.get("user"), credentials.get("password"), "contact@info.com",
-                        "admin", "George Silva", "ambiental"));
+    public ResponseEntity<UserInfoDto> authenticate(@RequestBody UserCredentials credentials) {
+        return ResponseEntity.ok(usersService.authenticateUser(credentials));
+    }
+
+    @GetMapping(
+            path = "/permissions",
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<UserPermissionsDto> getUserPermissions(@RequestParam("role") String role) {
+        return ResponseEntity.ok(usersService.getUserPermissions(role));
     }
 
 }
