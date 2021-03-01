@@ -1,0 +1,150 @@
+<div class="row">
+<div class="panel-group">
+
+    <div ba-panel
+        ba-panel-class="with-scroll viewport100">
+        <table class="table table-striped table-sga"
+                st-safe-src="vm.safePendenciasTableData"
+                st-table="vm.tabelaPendencias">
+        <thead>
+            <tr>
+                <td colspan="14" >
+                    <sga-table-filters
+                        table-data="vm.pendenciasTableData"
+                        filter-groups="vm.filterGroups"
+                        group-title="'Selecione o tipo de filtro'"
+                        filter-title="'Selecione um respnsável'"
+                        is-all-collapsed="vm.isAllCollapsed"
+                        on-filter-change="vm.filterPendencias(tableData)"
+                        on-change-collapse="vm.collapseTable(collapsed)">
+                    </sga-table-filters>
+                </td>
+            </tr>
+            <tr>
+                <th/>
+                <th ng-if="!hideHeaderDCEsteira" class="table-id" st-sort="id" st-sort-default="true" title="Ordenar por Número da Cotação">Cotação No.</th>
+                <th ng-if="hideHeaderDCEsteira" class="table-id" st-sort="pid" title="Ordenar por Número do Projeto">Projeto No.</th>
+                <th ng-if="hideHeaderDCEsteira" st-sort="desteira" title="Dias na esteira">D.C. Esteira</th>
+                <th st-sort="duesteira" title="Dias Úteis na esteira">D.U. Esteira</th>
+                <th st-sort="duetapa" title="Dias Úteis na etapa">D.U. Etapa</th>
+                <th st-sort="cliente" title="Ordenar por Cliente">Cliente</th>
+                <th ng-if="!vm.isMobile" st-sort="status" title="Ordenar por Status">Status</th>
+                <th st-sort="tecnologia" title="Ordenar por Tecnologia">Tecnologia</th>
+                <th st-sort="id_wcd_estudo" title="Ordenar por WCD">WCD</th>
+                <th st-sort="id_scd" title="Ordenar por SCD">SCD</th>
+                <!--<th st-sort="id_integra" title="Ordenar por INTEGRA">INTEGRA</th>-->
+                <th ng-if="!vm.isMobile" st-sort="vel_acesso" title="Ordenar por Velocidade de Acesso">Vel. Acesso</th>
+                <th ng-if="!vm.isMobile" st-sort="vel_banda" title="Ordenar por Velocidade de Banda">Vel. Banda</th>
+                <th ng-if="!hideHeaderDCEsteira" st-sort="termometro" title="Ordenar por Termômetro de Venda">Term.
+                    <span class="icon ion-thermometer" ng-style="{'color':'black', 'font-size':'150%'}">°</span>
+                </th>
+                <th>Ações</th>
+            </tr>
+            <tr>
+                <th/>
+                <th ng-if="!hideHeaderDCEsteira"><input st-search="id" placeholder="Cotação..." class="input-sm form-control" type="search"/></th>
+                <th ng-if="hideHeaderDCEsteira"><input st-search="pid" placeholder="Projeto..." class="input-sm form-control" type="search"/></th>
+                <th ng-if="hideHeaderDCEsteira"/>
+                <th/>
+                <th/>
+                <th><input st-search="cliente" placeholder="Cliente..." class="input-sm form-control" type="search"/></th>
+                <th ng-if="!vm.isMobile" ><input st-search="status" placeholder="Status..." class="input-sm form-control" type="search"/></th>
+                <th><input st-search="tecnologia" placeholder="Tecnologia..." class="input-sm form-control" type="search"/></th>
+                <th><input st-search="id_wcd_estudo" placeholder="WCD..." class="input-sm form-control" type="search"/></th>
+                <th><input st-search="id_scd" placeholder="SCD..." class="input-sm form-control" type="search"/></th>
+                <!--<th><input st-search="id_integra" placeholder="INTEGRA..." class="input-sm form-control" type="search"/></th>-->
+                <th ng-if="!vm.isMobile"><input st-search="vel_acesso" placeholder="Vel. Acesso..." class="input-sm form-control" type="search"/></th>
+                <th ng-if="!vm.isMobile"><input st-search="vel_banda" placeholder="Vel. Banda..." class="input-sm form-control" type="search"/></th>
+                <th ng-if="!hideHeaderDCEsteira"/>
+                <th/>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat-start="pendencia in vm.tabelaPendencias track by pendencia.id"
+                st-select-row="row" title="Clique para ver mais detalhes desta pendência"
+                                ng-init="vm.isCollapsed[pendencia.id]=(true)"
+                                ng-click="vm.isCollapsed[pendencia.id] = !vm.isCollapsed[pendencia.id]">
+                <td>
+                    <i class="glyphicon" ng-class="{'glyphicon-chevron-down': vm.isCollapsed[pendencia.id], 'glyphicon-chevron-right': !vm.isCollapsed[pendencia.id]}"></i>
+                </td>
+                <td ng-if="!hideHeaderDCEsteira" class="table-id" >
+                    <a ui-sref="app.cotacoes.cotacao({ id: pendencia.id })">
+                        {{ pendencia.id }}
+                    </a>
+                </td>
+                <td ng-if="hideHeaderDCEsteira" class="table-id" >
+                    <a ui-sref="app.projetos.projeto({ id: pendencia.pid })">
+                        {{ pendencia.pid }}
+                    </a>
+                </td>
+                <td ng-if="hideHeaderDCEsteira">{{pendencia.desteira}}</td>
+                <td>{{pendencia.duesteira}}</td>
+                <td>{{pendencia.duetapa}}</td>
+                <td>{{pendencia.cliente}}</td>
+                <td ng-if="!vm.isMobile" >
+                    <a ui-sref="app.cotacoes.esteira.status({ status: pendencia.status })">
+                        {{ vm.stateMachine[pendencia.status].pretty_name }}
+                    </a>
+                </td>
+                <td>{{pendencia.tecnologia}}</td>
+                <td>{{pendencia.id_wcd_estudo}}</td>
+                <td>{{pendencia.id_scd}}</td>
+                <!--<td>{{pendencia.id_integra}}</td>-->
+                <td ng-if="!vm.isMobile">{{pendencia.vel_acesso}}</td>
+                <td ng-if="!vm.isMobile">{{pendencia.vel_banda}}</td>
+                <td ng-if="!hideHeaderDCEsteira">
+                    <sga-thermometer
+                        temperature="{{ pendencia.termometro }}"
+                        icon-size="150%">
+                    </sga-thermometer>
+                </td>
+                <td ng-click="$event.stopPropagation()">
+                    <div class="btn-group" uib-dropdown auto-close="disabled" is-open="vm.actionMenuIsOpen[pendencia.id]">
+                        <button type="button" class="btn btn-xs btn-info" uib-dropdown-toggle>
+                            Ações <span class="caret"></span>
+                        </button>
+                        <ul class="top-dropdown-menu profile-dropdown" style="min-width: 78px; width: auto; top: 45px; right: -15px"
+                            uib-dropdown-menu role="menu">
+                            <li><i class="dropdown-arr"></i></li>
+                            <li role="menuitem" ng-repeat="action in ::vm.stateMachine[pendencia.status].actions | filterBy: ['visible'] : '1'">
+                                <sga-action-button cotacao-id="pendencia.id"
+                                                action="action"
+                                                size='xs'
+                                                title="{{action.context_name}}"
+                                                ng-click="vm.actionMenuIsOpen[pendencia.id]=false">
+                                </sga-action-button>
+                            </li>
+                        </ul>
+                    </div>
+                </td>
+            </tr>
+            <tr ng-repeat-end>
+                <td colspan="13">
+                    <div class="panel-collapse collapse" uib-collapse="vm.isCollapsed[pendencia.id] && vm.isAllCollapsed">
+                        <div>
+                            <pendencias-table-detail pendencia="pendencia" state-machine="vm.stateMachine[pendencia.status]"></pendencias-table-detail>
+                        </div>
+                        <div class="panel-footer">
+                            <sga-action-button ng-repeat="action in ::vm.stateMachine[pendencia.status].actions"
+                                            cotacao-id="pendencia.id"
+                                            action="action"
+                                            size='xs'
+                                            title="{{action.context_name}}">
+                            </sga-action-button>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="14">
+                    <sga-st-pagination viewport-paging></sga-st-pagination>
+                </td>
+            </tr>
+        </tfoot>
+        </table>
+    </div>
+
+</div>
+</div>

@@ -1,0 +1,122 @@
+<div class="row">
+<div class="panel-group">
+
+    <div ba-panel
+        ba-panel-class="with-scroll viewport80">
+        <table class="table table-striped table-sga"
+                st-safe-src="vm.safeCotacoesTableData"
+                st-table="vm.tabelaCotacoes">
+        <thead>
+            <tr>
+                <td colspan="9" >
+                    <sga-table-filters
+                        table-data="vm.cotacoesTableData"
+                        filter-groups="vm.filterGroups"
+                        group-title="'Área do Gerente'"
+                        filter-title="'Selecione um Gerente'"
+                        is-all-collapsed="vm.isAllCollapsed"
+                        on-filter-change="vm.filterCotacoes(tableData)"
+                        on-change-collapse="vm.collapseTable(collapsed)">
+                    </sga-table-filters>
+                </td>
+            </tr>
+            <tr>
+                <th/>
+                <th class="table-id" st-sort="id" st-sort-default="true"  title="Ordenar por Número da Cotação">Cotação No.</th>
+                <th st-sort="cliente" title="Ordenar por Cliente">Cliente</th>
+                <th ng-if="!vm.isMobile" st-sort="nome_projeto" title="Ordenar por Projeto">Projeto</th>
+                <th st-sort="tecnologia" title="Ordenar por Tecnologia">Tecnologia</th>
+                <th st-sort="topologia" title="Ordenar por Topologia">Topologia</th>
+                <th st-sort="mensalidade" title="Ordenar por Mensalidade">Mensalidade</th>
+                <th st-sort="termometro" title="Ordenar por Termômetro de Venda">Term.
+                    <span class="icon ion-thermometer" ng-style="{'color':'black', 'font-size':'150%'}">°</span>
+                </th>
+                <th>Ações</th>
+            </tr>
+            <tr>
+                <th/>
+                <th><input st-search="id" placeholder="Cotação..." class="input-sm form-control" type="search"/></th>
+                <th><input st-search="cliente" placeholder="Cliente..." class="input-sm form-control" type="search"/></th>
+                <th ng-if="!vm.isMobile"><input st-search="nome_projeto" placeholder="Projeto..." class="input-sm form-control" type="search"/></th>
+                <th><input st-search="tecnologia" placeholder="Tecnologia..." class="input-sm form-control" type="search"/></th>
+                <th><input st-search="tipo_acesso" placeholder="Topologia..." class="input-sm form-control" type="search"/></th>
+                <th/>
+                <th/>
+                <th/>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat-start="cotacao in vm.tabelaCotacoes track by cotacao.id"
+                st-select-row="row" title="Clique para ver mais detalhes desta cotação"
+                                ng-init="vm.isCollapsed[cotacao.id]=(true)"
+                                ng-click="vm.isCollapsed[cotacao.id] = !vm.isCollapsed[cotacao.id]">
+                <td>
+                    <i class="glyphicon" ng-class="{'glyphicon-chevron-down': vm.isCollapsed[cotacao.id], 'glyphicon-chevron-right': !vm.isCollapsed[cotacao.id]}"></i>
+                </td>
+                <td class="table-id" >
+                    <a ui-sref="app.cotacoes.cotacao({ id: cotacao.id })" ng-click="$event.stopPropagation();">
+                        {{ cotacao.id }}
+                    </a>
+                    <span sla-badge days="{{ cotacao.atualizado_em | daysDistance }}" sla="vm.sla"></span>
+                </td>
+                <td>{{cotacao.cliente}}</td>
+                <td ng-if="!vm.isMobile">{{cotacao.nome_projeto}}</td>
+                <td>{{cotacao.tecnologia}}</td>
+                <td>{{cotacao.tipo_acesso}}</td>
+                <td>{{cotacao.mensalidade | number: 2}}</td>
+                <td>
+                    <sga-thermometer
+                        temperature="{{ cotacao.termometro }}"
+                        icon-size="150%">
+                    </sga-thermometer>
+                </td>
+                <td ng-click="$event.stopPropagation()">
+                    <div class="btn-group" uib-dropdown auto-close="disabled" is-open="vm.actionMenuIsOpen[cotacao.id]">
+                        <button type="button" class="btn btn-xs btn-info" uib-dropdown-toggle>
+                            Ações <span class="caret"></span>
+                        </button>
+                        <ul class="top-dropdown-menu profile-dropdown" style="min-width: 78px; width: auto; top: 45px; right: -15px"
+                            uib-dropdown-menu role="menu">
+                            <li><i class="dropdown-arr"></i></li>
+                            <li role="menuitem" ng-repeat="action in ::vm.actionsList">
+                                <sga-action-button cotacao="cotacao"
+                                                action="action"
+                                                size='xs'
+                                                title="{{action.context_name}}"                                                
+                                                ng-click="vm.actionMenuIsOpen[cotacao.id]=false">
+                                </sga-action-button>
+                            </li>
+                        </ul>
+                    </div>
+                </td>
+            </tr>
+            <tr ng-repeat-end>
+                <td colspan="9">
+                    <div class="panel-collapse collapse" uib-collapse="vm.isCollapsed[cotacao.id] && vm.isAllCollapsed">
+                        <div>
+                            <cotacoes-table-detail cotacao="cotacao" state-machine="vm.stateMachine"></cotacoes-table-detail>
+                        </div>
+                        <div class="panel-footer">
+                            <sga-action-button ng-repeat="action in ::vm.actionsList"
+                                            cotacao="cotacao"
+                                            action="action"
+                                            size='xs'
+                                            title="{{action.context_name}}">
+                            </sga-action-button>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="9">
+                    <sga-st-pagination viewport-paging></sga-st-pagination>
+                </td>
+            </tr>
+        </tfoot>
+        </table>
+    </div>
+
+</div>
+</div>

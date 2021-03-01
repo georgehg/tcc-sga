@@ -1,0 +1,34 @@
+<div class="row">
+    <div class="col-sm-1 col-md-1 pull-left" style="padding: 0px 5px">
+        <ui-select ng-model="vm.groupSelect.selected"
+                    on-select="vm.selectGroup($item)"
+                    search-enabled="false"
+                    title="{{vm.groupTitle}}">>
+            <ui-select-match>{{$select.selected.selectable}}</ui-select-match>
+            <ui-select-choices repeat="group as group in vm.groupSelect.groups">
+                <div ng-bind-html="group.selectable"></div>
+                <small>{{group.description}}</small>
+            </ui-select-choices>
+        </ui-select>
+    </div>
+    <div class="col-xs-4 col-sm-4 col-md-4 pull-left" style="padding: 0px">
+        <ui-select ng-model="vm.filterSelect.selected"
+                    on-select="vm.selectFilter($item)"
+                    search-enabled="false"
+                    title="{{vm.filterTitle}}">
+            <ui-select-match>{{$select.selected}}</ui-select-match>
+            <ui-select-choices repeat="fs as fs in vm.filterSelect.options">
+                <div ng-bind-html="fs"></div>
+            </ui-select-choices>
+        </ui-select>
+    </div>
+    <div class="col-xs-2 col-sm-2 col-md-2 col-xs-offset-1 col-sm-offset-5 col-md-offset-5" style="padding: 0px">
+        <button type="button" class="btn btn-sm btn-info pull-right"
+                uib-btn-checkbox
+                btn-checkbox-true="false" btn-checkbox-false="true"
+                ng-model="vm.isAllCollapsed"
+                ng-change="vm.changeCollapse()">
+                Expandir todos
+        </button>
+    </div>
+</div>

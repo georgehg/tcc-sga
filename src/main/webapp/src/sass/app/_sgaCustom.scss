@@ -1,0 +1,29 @@
+.badge-sla {
+    padding: 2px 4px 2px 4px;
+    vertical-align: baseline;
+    white-space: nowrap;
+    text-align: center;
+    border-radius: 13px;
+    text-shadow: none;
+    line-height: 11px;
+    position: relative;
+    top: -5px;
+    font-size: 10px;
+}
+
+.badge-info {
+    background-color: $info;
+}
+
+.badge-warning {
+    background-color: $warning-dark;
+}
+
+.badge-danger {
+    background-color: $danger;
+}
+
+.pagination li a input {
+  padding: 0;
+  margin: -5px 0;
+}

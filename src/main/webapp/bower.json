@@ -1,0 +1,115 @@
+{
+  "name": "sga-webapp",
+  "version": "1.0.0",
+  "homepage": "http://10.128.223.33/git/sga-webapp",
+  "authors": [
+    "George Silva"
+  ],
+  "description": "Sistema de Gestão Ambiental - Web Application",
+  "license": "UNLICENSED",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "~3.5.1",
+    "jquery-ui": "~1.12.1",
+    "jquery.easing": "~1.3.1",
+    "jquery.easy-pie-chart": "~2.1.6",
+    "chart.js": "~2.9.4",
+    "Ionicons": "ionicons#~2.0.1",
+    "amcharts": "~3.15.2",
+    "amcharts-stock": "*",
+    "angular": "~1.8.2",
+    "angular-slimscroll": "~1.1.5",
+    "angular-smart-table": "~2.1.11",
+    "angular-toastr": "~2.1.1",
+    "angular-touch": "~1.8.2",
+    "angular-filter": "^0.5.17",
+    "angular-resource": "1.8.2",
+    "angular-bootstrap": "~2.5.0",
+    "angular-ui-sortable": "~0.19.0",
+    "angular-ui-router": "~1.0.29",
+    "angular-ui-select": "^0.19.8",
+    "animate.css": "~4.1.1",
+    "bootstrap": "~3.4.1",
+    "bootstrap-select": "~1.13.18",
+    "bootstrap-switch": "~3.3.4",
+    "bootstrap-tagsinput": "~0.8.0",
+    "font-awesome": "fontawesome#~4.7.0",
+    "fullcalendar": "~5.5.1",
+    "highlight": "~9.12.0",
+    "leaflet": "~1.7.1",
+    "moment": "~2.29.1",
+    "slimScroll": "jquery-slimscroll#~1.3.6",
+    "angular-progress-button-styles": "~0.1.0",
+    "angular-chart.js": "~1.1.1",
+    "angular-chartist.js": "~4.3.4",
+    "chartist": "0.11.4",
+    "angular-morris-chart": "~1.3.0",
+    "ionrangeslider": "2.2.0",
+    "angular-animate": "~1.8.2",
+    "textAngularJs": "~2.1.2",
+    "angular-xeditable": "~0.10.2",
+    "ng-js-tree": "~0.0.10",
+    "angular-bootstrap-scrolling-tabs": "~1.2.0",
+    "angularjs-slider": "^7.0.0",
+    "ngmap": "^1.18.4",
+    "angular-ui-grid": "^4.10.0",
+    "lodash": "^4.17.21",
+    "excel-builder-js": "excelbuilder#^2.0.2",
+    "pdfmake": "^0.1.70",
+    "angular-cookies": "^1.8.2",
+    "ngPlacesAutocomplete": "ng-places-autocomplete#^1.2.4"
+  },
+  "resolutions": {
+    "angular": "~1.8.2",
+    "jquery": "~3.5.1"
+  },
+  "overrides": {
+    "amcharts": {
+      "main": [
+        "./dist/amcharts/amcharts.js",
+        "./dist/amcharts/plugins/responsive/responsive.min.js",
+        "./dist/amcharts/serial.js",
+        "./dist/amcharts/funnel.js",
+        "./dist/amcharts/pie.js",
+        "./dist/amcharts/gantt.js"
+      ]
+    },
+    "amcharts-stock": {
+      "main": "./dist/amcharts/amstock.js"
+    },
+    "bootstrap": {
+      "main": [
+        "dist/css/bootstrap.min.css",
+        "js/dropdown.js",
+        "./dist/fonts/**.*"
+      ]
+    },
+    "slimScroll": {
+      "main": "./jquery.slimscroll.js"
+    },
+    "angular-smart-table": {
+      "main": "./dist/smart-table.js"
+    },
+    "angular-chartist.js": {
+      "main": "./dist/angular-chartist.js"
+    },
+    "font-awesome": {
+      "main": [
+        "css/font-awesome.css",
+        "fonts/FontAwesome.otf",
+        "fonts/fontawesome-webfont.eot",
+        "fonts/fontawesome-webfont.svg",
+        "fonts/fontawesome-webfont.ttf",
+        "fonts/fontawesome-webfont.woff",
+        "fonts/fontawesome-webfont.woff2"
+      ]
+    }
+  }
+}
