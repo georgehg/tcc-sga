@@ -19,6 +19,7 @@ import java.nio.file.Files;
 import java.util.Arrays;
 import java.util.List;
 
+import static org.hamcrest.Matchers.contains;
 import static org.hamcrest.Matchers.equalTo;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -64,16 +65,18 @@ public class UsersControllerTest {
     @Test
     public void givenUserRole_ReturnUserPermissions() throws Exception {
         String role = "admin";
-        List<String> permissions = Arrays.asList("policies");
-
         when(usersService.getUserPermissions(role)).thenReturn(
-                UserPermissionsDto.build(permissions.stream().toArray(String[]::new)));
+                UserPermissionsDto.build(
+                        UserPermissionsDto.UserRolesDto.of("policies", Arrays.asList("create", "edit", "delete")),
+                        UserPermissionsDto.UserRolesDto.of("requirements", Arrays.asList("create", "edit"))));
 
         mvc.perform(get("/sga/api/v1/users/permissions?role=" + "admin")
                 .contextPath("/sga/api/v1")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.roles[0]", equalTo(permissions.get(0))));
+                .andExpect(jsonPath("$.roles[0].name", equalTo("policies")))
+                .andExpect(jsonPath("$.roles[0].privileges", contains("create", "edit", "delete")))
+                .andExpect(jsonPath("$.roles[1].name", equalTo("requirements")));
     }
 
 }

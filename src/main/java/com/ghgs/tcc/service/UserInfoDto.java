@@ -6,21 +6,17 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-@AllArgsConstructor(access = AccessLevel.PRIVATE)
-@NoArgsConstructor(force = true)
+@AllArgsConstructor(staticName = "of")
+@NoArgsConstructor(access = AccessLevel.PRIVATE, force = true)
 @Getter
 @EqualsAndHashCode
 public class UserInfoDto {
 
-    private String user;
-    private String password;
-    private String email;
-    private String role;
-    private String name;
-    private String area;
-
-    public static UserInfoDto of(String user, String password, String email, String role, String name, String area) {
-        return new UserInfoDto(user, password, email, role, name, area);
-    }
+    private final String user;
+    private final String password;
+    private final String email;
+    private final String role;
+    private final String name;
+    private final String area;
 
 }

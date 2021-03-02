@@ -3,6 +3,8 @@ package com.ghgs.tcc.service;
 import com.ghgs.tcc.api.UserCredentials;
 import org.springframework.stereotype.Service;
 
+import java.util.Arrays;
+
 @Service
 public class UsersService {
 
@@ -12,6 +14,8 @@ public class UsersService {
     }
 
     public UserPermissionsDto getUserPermissions(String role) {
-        return UserPermissionsDto.build("policies", "incidents");
+        return UserPermissionsDto.build(
+                UserPermissionsDto.UserRolesDto.of("documents", Arrays.asList("create", "edit", "delete")),
+                UserPermissionsDto.UserRolesDto.of("requirements", Arrays.asList("create", "edit", "delete")));
     }
 }

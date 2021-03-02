@@ -6,15 +6,23 @@ import java.util.Arrays;
 import java.util.List;
 
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
-@NoArgsConstructor(force = true)
+@NoArgsConstructor(access = AccessLevel.PRIVATE, force = true)
 @Getter
 @EqualsAndHashCode
 public class UserPermissionsDto {
 
-    private List<String> roles;
+    private final List<UserRolesDto> roles;
 
-    public static UserPermissionsDto build(String... roles) {
+    public static UserPermissionsDto build(UserRolesDto... roles) {
         return new UserPermissionsDto(Arrays.asList(roles));
+    }
+
+    @AllArgsConstructor(staticName = "of")
+    @NoArgsConstructor(access = AccessLevel.PRIVATE, force = true)
+    @Getter
+    public static class UserRolesDto {
+        private final String name;
+        private final List<String> privileges;
     }
 
 }
