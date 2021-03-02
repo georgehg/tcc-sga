@@ -7,12 +7,9 @@
 
   angular
     .module('sga.pages', [
-
-      'BlurAdmin.pages.dashboard',
-
-      'sga.pages.relatorios',
-      'sga.pages.pendencias',
-      'sga.pages.cotacoes'
+      
+      'sga.pages.policies',
+      'sga.pages.relatorios'
       
   ]);
     

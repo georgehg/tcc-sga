@@ -1,0 +1,65 @@
+<div class="row">
+    <div class="panel-group">
+    
+        <div ba-panel
+            ba-panel-class="with-scroll viewport80">
+            <table class="table table-striped table-sga"
+                    st-safe-src="vm.safePoliciesDocumentsData"
+                    st-table="vm.policiesDocumentsTable">
+            <thead>
+                <tr>
+                    <th/>
+                    <th class="table-id" st-sort="id" st-sort-default="true"  title="Ordenar por Número do Documento">Documento No.</th>
+                    <th st-sort="name" title="Ordenar por nome do Docummento">Nome</th>
+                    <th st-sort="type" title="Ordenar por Tecnologia">Tipo</th>
+                    <th>Ações</th>
+                </tr>
+                <tr>
+                    <th ng-click="$event.stopPropagation()">
+                        <button  disable="!vm.createPermission" type="button" class="btn btn-sm btn-info" ng-click="vm.createPolicy()">Nova Politica</button>
+                    </th>
+
+                    <th><input st-search="id" placeholder="Documento No." class="input-sm form-control" type="search"/></th>
+                    <th><input st-search="name" placeholder="Nome..." class="input-sm form-control" type="search"/></th>
+                    <th><input st-search="type" placeholder="Tipo..." class="input-sm form-control" type="search"/></th>
+                    <th/>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat-start="policy in vm.policiesDocumentsTable track by policy.id"
+                    st-select-row="row" title="Clique para visualizar este documento"
+                                    ng-init="vm.isCollapsed[policy.id]=(true)"
+                                    ng-click="vm.isCollapsed[policy.id] = !vm.isCollapsed[policy.id]">
+                    <td>
+                        <i class="glyphicon" ng-class="{'glyphicon-chevron-down': vm.isCollapsed[policy.id], 'glyphicon-chevron-right': !vm.isCollapsed[policy.id]}"></i>
+                    </td>
+                    <td class="table-id" >{{ policy.id }}</td>
+                    <td>{{policy.name}}</td>
+                    <td>{{policy.type}}</td>
+                    <td ng-click="$event.stopPropagation()">
+                        <button type="button" class="btn btn-xs btn-primary" ng-click="vm.editPolicy(policy)">Editar</button>
+                        <button type="button" class="btn btn-xs btn-danger" ng-click="vm.deletePolicy(policy)">Deletar</button>
+                    </td>
+                </tr>
+                <tr ng-repeat-end>
+                    <td colspan="9">
+                        <div class="panel-collapse collapse" uib-collapse="vm.isCollapsed[policy.id] && vm.isAllCollapsed">
+                            <div>
+                                {{policy.document}}
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="9">
+                        <sga-st-pagination viewport-paging></sga-st-pagination>
+                    </td>
+                </tr>
+            </tfoot>
+            </table>
+        </div>
+    
+    </div>
+    </div>

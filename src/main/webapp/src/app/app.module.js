@@ -26,8 +26,6 @@ angular
     'sga.components',
     'sga.constants',
     'sga.directives',
-    'sga.filters',
-    'sga.modals',
     'sga.pages',
     'sga.resources',
     'sga.services'])
@@ -68,7 +66,7 @@ angular
   };
 
   /** @ngInject */
-  function appRun($trace, $rootScope, $transitions, $state, $stateParams, userService, notifyService, toastr, editableOptions) {
+  function appRun($trace, $rootScope, $transitions, $state, $stateParams, userService, notifyService, toastr) {
 
     // Trace log for $state transitions
     $trace.enable('TRANSITION');
@@ -124,7 +122,7 @@ angular
             } else {
 
               if (userService.checkPermission("policies")) {
-                return transition.router.stateService.target('app.policies');
+                return transition.router.stateService.target('app.documents');
               }
 
               return true;

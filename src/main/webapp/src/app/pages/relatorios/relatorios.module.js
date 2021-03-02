@@ -29,7 +29,7 @@
           protected: true,
           sidebarMeta: {
             icon: 'ion-clipboard',
-            order: 100,
+            order: 200,
           }
         })
         .state('app.relatorios.pendencias-prevenda', {

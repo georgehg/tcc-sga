@@ -124,7 +124,7 @@
             }
 
             return _permissionsPromise.toJSON()[permission] ? true : false;
-        }        
+        }
 
         function hasPermission(permission) {
 
@@ -145,7 +145,7 @@
                             return false;
                         }
 
-                        return userPermissions.toJSON()[permission] ? true : false;
+                        return userPermissions.toJSON()[permission]  ? true : false;
                     }
                     ,function(error) {
                         return false;
@@ -213,7 +213,7 @@
             }
 
             var hasPrivilege = _permissionsPromise.toJSON()[permission] &&
-                            _permissionsPromise.toJSON()[permission].indexOf(privilege) != -1;
+            _permissionsPromise.toJSON()[permission].indexOf(privilege) != -1;
 
             return hasPrivilege;
         }

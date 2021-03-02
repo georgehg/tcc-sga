@@ -20,15 +20,15 @@
 
                 var permissions = {};
                 
-                angular.forEach(response, function(element) {
-                    var privileges =  (! element.role_privileges || element.role_privileges == "") ? [] : element.role_privileges.split(',');
-                    permissions[element.permission_name] = privileges;
+                angular.forEach(response.roles, function(element) {
+                    permissions[element.name] = element.privileges;
                 });
+
+                console.log(permissions);
 
                 return permissions;
             }
-        }
-        });
+        }});
     }
 
 })();

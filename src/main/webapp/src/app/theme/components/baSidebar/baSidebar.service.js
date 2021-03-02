@@ -71,7 +71,7 @@
                 return s.sidebarMeta;
               })
               .map(function(s) {
-                var meta = s.sidebarMeta;
+                const meta = s.sidebarMeta;
                 return {
                   name: s.name,
                   title: s.title,

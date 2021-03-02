@@ -6,8 +6,8 @@
     'use strict';
 
     angular
-    .module('sga.pages.cotacoes')
-    .component('criarCotacao', {
+    .module('sga.pages.policies')
+    .component('newDocument', {
 
         controllerAs: 'vm',
 

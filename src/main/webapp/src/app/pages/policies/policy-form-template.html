@@ -1,0 +1,41 @@
+<div class="row">
+    <div class="panel-group">
+
+        <form editable-form name="editableForm">
+
+            <div ba-panel>
+                <div class="row">
+                    <div class="col-xs-3 col-sm-2 col-md-1">
+                        <label class="btn btn-default pull-left" sga-history-back>Voltar</label>
+                    </div>
+                    <div class="col-xs-6 col-sm-8 col-md-10">
+                        <h3 style="margin: 5px 0px 5px 0px">
+                            <b>Documento: </b> {{ :: vm.policyDocument.name }}
+                        </h3>
+                    </div>
+                </div>
+            </div>
+
+            <div ba-panel ba-panel-class="with-scroll horizontal-tabs tabs-panel viewport100">
+                <br />
+                <div class="row">
+                    <div class="col-xs-12 col-sm-4 col-md-4 text-left">
+                        <sga-label-data ld-label="Documento N°." ld-data="{{ :: vm.policyDocument.id }}" />
+                        <sga-label-data ld-label="Nome" ld-data="{{ :: vm.policyDocument.name }}" />
+                        <sga-label-data ld-label="Tipo" ld-data="{{ :: vm.policyDocument.type }}" />
+                        <sga-label-data ld-label="Documento" ld-data="{{ :: vm.policyDocument.document }}" />
+                    </div>
+                </div>
+                <hr>
+            </div>
+
+            <div ba-panel ng-if="vm.actionsList && vm.statusPermission">
+                <sga-action-button ng-repeat="action in ::vm.actionsList" cotacao="vm.policyDocument" action="action" size='sm'
+                    title="{{action.context_name}}">
+                </sga-action-button>
+            </div>
+
+        </form>
+
+    </div>
+</div>
